@@ -2,8 +2,9 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Helpers\Functions;
+use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class getResultMb45s extends Command
 {
@@ -39,27 +40,16 @@ class getResultMb45s extends Command
      */
     public function handle()
     {
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => env('EE88_URL').'/server/lottery/drawResult?lottery_id=47&page=1&limit=10&date=',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-            CURLOPT_HTTPHEADER => array(
-                'Cookie: PHPSESSID=gb9kip2ef8gdtu4lceuvrkcoth; think_var=en'
-            ),
-        ));
-
-        $response = curl_exec($curl);
-
-        curl_close($curl);
-        dd(json_decode($response)->data->list[0]->issue);
-
-        return 0;
+        try {
+            // $userInfo = $this->getInfoUser();
+            // $userBankList = $this->getUserBankList();
+            // $listResultMb45s = $this->getListResultMb45s(1,5);
+            $this->sendNotificationTelegram('45s');
+            return 0;
+        } catch (\Throwable $th) {
+            $message = "Có lỗi xảy ra: " . $th->getMessage() . ", dòng: " . $th->getLine() . ", file: " . $th->getFile();
+            $this->sendNotificationTelegram($message);
+            Log::error("Có lỗi xảy ra: {$th->getMessage()}, dòng: {$th->getLine()}, file: {$th->getFile()}");
+        }
     }
 }
