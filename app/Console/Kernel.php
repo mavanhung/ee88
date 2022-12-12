@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\getResultMb45s::class,
     ];
 
     /**
@@ -25,6 +25,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->command('command:mb45s')
+                    ->timezone('Asia/Ho_Chi_Minh')
+                    ->everyMinute()
+                    ->withoutOverlapping();
     }
 
     /**
