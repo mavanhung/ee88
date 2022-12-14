@@ -200,26 +200,26 @@ trait Functions
         $number4 = $result['data']['open_numbers_formatted'][3];
         $number5 = $result['data']['open_numbers_formatted'][4];
 
-        $listResult = $this->getListResult(DefineCode::MB45S_LOTTERY_ID, 1, 4);
-        $numberListResult1 = $listResult[0]['open_numbers_formatted'][4];
-        $numberListResult2 = $listResult[1]['open_numbers_formatted'][4];
-        $numberListResult3 = $listResult[2]['open_numbers_formatted'][4];
-        $numberListResult4 = $listResult[3]['open_numbers_formatted'][4];
+        // $listResult = $this->getListResult(DefineCode::MB45S_LOTTERY_ID, 1, 4);
+        // $numberListResult1 = $listResult[0]['open_numbers_formatted'][4];
+        // $numberListResult2 = $listResult[1]['open_numbers_formatted'][4];
+        // $numberListResult3 = $listResult[2]['open_numbers_formatted'][4];
+        // $numberListResult4 = $listResult[3]['open_numbers_formatted'][4];
 
         if($number4 == '0' && $number5 == '0') {
             $this->combatMb45s(DefineCode::PLAY_ODD);
             $this->sendNotificationTelegram('Kỳ: '. $result['data']['issue']);
         }
-        //Trường hợp 1 cây chẵn, 3 cây lẻ liên tục
-        if($numberListResult1 % 2 == 0 && $numberListResult2 % 2 != 0 && $numberListResult3 % 2 != 0 && $numberListResult4 % 2 != 0){
-            $this->combatMb45s(DefineCode::PLAY_ODD);
-            $this->sendNotificationTelegram('Kỳ: '. $result['data']['issue']);
-        }
-        //Trường hợp 1 cây lẻ, 3 cây chẵn liên tục
-        if($numberListResult1 % 2 != 0 && $numberListResult2 % 2 == 0 && $numberListResult3 % 2 == 0 && $numberListResult4 % 2 == 0){
-            $this->combatMb45s(DefineCode::PLAY_EVEN);
-            $this->sendNotificationTelegram('Kỳ: '. $result['data']['issue']);
-        }
+        // //Trường hợp 1 cây chẵn, 3 cây lẻ liên tục
+        // if($numberListResult1 % 2 == 0 && $numberListResult2 % 2 != 0 && $numberListResult3 % 2 != 0 && $numberListResult4 % 2 != 0){
+        //     $this->combatMb45s(DefineCode::PLAY_ODD);
+        //     $this->sendNotificationTelegram('Kỳ: '. $result['data']['issue']);
+        // }
+        // //Trường hợp 1 cây lẻ, 3 cây chẵn liên tục
+        // if($numberListResult1 % 2 != 0 && $numberListResult2 % 2 == 0 && $numberListResult3 % 2 == 0 && $numberListResult4 % 2 == 0){
+        //     $this->combatMb45s(DefineCode::PLAY_EVEN);
+        //     $this->sendNotificationTelegram('Kỳ: '. $result['data']['issue']);
+        // }
         // //Trường hợp 3 cây lẻ liên tục
         // if($numberListResult1 % 2 != 0 && $numberListResult2 % 2 != 0 && $numberListResult3 % 2 != 0){
         //     $this->combatMb45s(DefineCode::PLAY_ODD);
@@ -231,15 +231,15 @@ trait Functions
         //     $this->sendNotificationTelegram('Kỳ: '. $result['data']['issue']);
         // }
         //Trường hợp 4 cây lẻ liên tục
-        if($numberListResult1 % 2 != 0 && $numberListResult2 % 2 != 0 && $numberListResult3 % 2 != 0 && $numberListResult4 % 2 != 0){
-            $this->combatMb45s(DefineCode::PLAY_ODD);
-            $this->sendNotificationTelegram('Kỳ: '. $result['data']['issue']);
-        }
-        //Trường hợp 4 cây chẵn liên tục
-        if($numberListResult1 % 2 == 0 && $numberListResult2 % 2 == 0 && $numberListResult3 % 2 == 0 && $numberListResult4 % 2 == 0){
-            $this->combatMb45s(DefineCode::PLAY_EVEN);
-            $this->sendNotificationTelegram('Kỳ: '. $result['data']['issue']);
-        }
+        // if($numberListResult1 % 2 != 0 && $numberListResult2 % 2 != 0 && $numberListResult3 % 2 != 0 && $numberListResult4 % 2 != 0){
+        //     $this->combatMb45s(DefineCode::PLAY_ODD);
+        //     $this->sendNotificationTelegram('Kỳ: '. $result['data']['issue']);
+        // }
+        // //Trường hợp 4 cây chẵn liên tục
+        // if($numberListResult1 % 2 == 0 && $numberListResult2 % 2 == 0 && $numberListResult3 % 2 == 0 && $numberListResult4 % 2 == 0){
+        //     $this->combatMb45s(DefineCode::PLAY_EVEN);
+        //     $this->sendNotificationTelegram('Kỳ: '. $result['data']['issue']);
+        // }
         $time = time();
         dump($time);
     }
@@ -249,7 +249,7 @@ trait Functions
         // Could be via socket or file etc.
         // Return TRUE to stop.
         $userInfo = $this->getInfoUser(DefineCode::COOKIE);
-        if($userInfo['data']['money'] <= 50000) {
+        if($userInfo['data']['money'] <= 30000) {
             $this->sendNotificationTelegram('Số tiền còn lại:' . $userInfo['data']['money']);
             return true;
         }

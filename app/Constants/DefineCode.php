@@ -10,7 +10,7 @@ namespace App\Constants;
 
 class DefineCode
 {
-    const PRICE = '5000'; //Số tiền đặt cược
+    const PRICE = '20000'; //Số tiền đặt cược
 
     //Chú ý: Phần này là đặt cược cho Miền bắc 45s
     const PLAY_ID_ODD = 2063; //Số Lẻ
