@@ -3,10 +3,12 @@
 namespace App\Console\Commands;
 
 use App\Helpers\Functions;
+use App\Constants\DefineCode;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Log;
 
-class getResultMb45s extends Command
+class autoTool extends Command
 {
     use Functions;
     /**
@@ -14,7 +16,7 @@ class getResultMb45s extends Command
      *
      * @var string
      */
-    protected $signature = 'command:mb45s';
+    protected $signature = 'command:auto-tool';
 
     /**
      * The console command description.
@@ -41,10 +43,21 @@ class getResultMb45s extends Command
     public function handle()
     {
         try {
-            // $userInfo = $this->getInfoUser();
-            // $userBankList = $this->getUserBankList();
-            // $listResultMb45s = $this->getListResultMb45s(1,5);
-            $this->sendNotificationTelegram('45s');
+            // $userInfo = $this->getInfoUser(DefineCode::COOKIE);
+            // $userBankList = $this->getUserBankList(DefineCode::COOKIE);
+            // $result = $this->getResult(DefineCode::MB45S_LOTTERY_ID);
+            // $listResultMb45s = $this->getListResult(DefineCode::MB45S_LOTTERY_ID);
+            // $this->combatMb45s(DefineCode::PLAY_ODD);
+
+            // $number4 = $result['data']['open_numbers_formatted'][3];
+            // $number5 = $result['data']['open_numbers_formatted'][4];
+            // if($number4 == '0' && $number5 == '0') {
+            //     dd('in');
+            // }
+            // dd($number4, $number5);
+
+            $this->start();
+
             return 0;
         } catch (\Throwable $th) {
             $message = "Có lỗi xảy ra: " . $th->getMessage() . ", dòng: " . $th->getLine() . ", file: " . $th->getFile();
